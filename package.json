@@ -1,0 +1,23 @@
+{
+  "name": "aws-utils",
+  "version": "1.0.0",
+  "description": "Utilities for working with AWS",
+  "main": "update-hostname.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andersjanmyr/aws-utils.git"
+  },
+  "author": "Anders Janmyr <anders@janmyr.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andersjanmyr/aws-utils/issues"
+  },
+  "homepage": "https://github.com/andersjanmyr/aws-utils",
+  "dependencies": {
+    "aws-sdk": "^2.1.30",
+    "yargs": "^3.9.1"
+  }
+}
