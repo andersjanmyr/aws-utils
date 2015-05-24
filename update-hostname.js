@@ -21,7 +21,7 @@ function main() {
   if (argv.dry)
     return console.log(argv);
   verbose = argv.verbose;
-  fetchZones(arg.domain, function(err, zones) {
+  fetchZones(argv.domain, function(err, zones) {
     var zoneId = zones[0].id;
     if (argv.delete) {
       return removeRecord(zoneId, argv.hostname, function(err, result) {
