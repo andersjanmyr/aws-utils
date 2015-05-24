@@ -17,10 +17,11 @@ function log() {
 
 function main() {
   var argv = parseArgs();
+  argv.domain = getDomain(argv.hostname) || 'janmyr.com';
   if (argv.dry)
     return console.log(argv);
   verbose = argv.verbose;
-  fetchZones(null, function(err, zones) {
+  fetchZones(arg.domain, function(err, zones) {
     var zoneId = zones[0].id;
     if (argv.delete) {
       return removeRecord(zoneId, argv.hostname, function(err, result) {
@@ -52,6 +53,14 @@ function parseArgs() {
   argv.target = argv._[1];
   return argv;
 }
+
+function getDomain(hostname) {
+  var arr = hostname.split('.');
+  if (arr.length > 2)
+    return arr.slice(1).join('.');
+  return null;
+}
+
 
 function fetchZones(domain, callback) {
   log('Fetching zones', domain);
