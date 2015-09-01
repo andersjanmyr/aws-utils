@@ -1,0 +1,11 @@
+#!/bin/bash
+
+name=$1
+shift
+dns=$(aws ec2 describe-instances \
+  --filters Name=tag:Name,Values=unstable-bodymetrics-master \
+  | jq -r .Reservations[].Instances[].PublicDnsName)
+
+echo "$dns"
+ssh $dns $*
+

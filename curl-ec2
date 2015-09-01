@@ -1,0 +1,5 @@
+#!/bin/bash
+
+BIN=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+name=$1
+$BIN/ssh-ec2 $name -C curl localhost 2>/dev/null
