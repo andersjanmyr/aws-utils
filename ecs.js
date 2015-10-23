@@ -37,7 +37,7 @@ function Cluster(data) {
 Cluster.prototype.getData = function getData(format) {
     if (format === 'flat')
         return _.pick(this, ['clusterName', 'status', 'clusterArn']);
-    else if (format === 'full')
+    else if (format === 'simple')
         return {
             clusterName: this.clusterName,
             status: this.status,
@@ -235,7 +235,7 @@ function fetchTaskDefinitions(ecs, tasks) {
 function run(options) {
     var ecs = ecsWrapper(options.region, options.cluster);
     ecs.fetchModel(function(err, model) {
-        var data = model.getData('simple');
+        var data = model.getData(options.format);
         var out = {};
         if (options.tasks || options.t)
             out.tasks = model.getTasks();
@@ -259,5 +259,7 @@ if (!args.region)
     args.region = 'eu-west-1';
 if (!args.cluster)
     args.cluster = 'unstable';
+if (!args.format)
+    args.format = 'simple';
 
 run(args);
