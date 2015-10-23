@@ -10,6 +10,7 @@ fi
 shift
 dns=$(aws ec2 describe-instances \
   --filters Name=tag:Name,Values=$name \
+  Name=instance-state-name,Values=running \
   | jq -r .Reservations[$index].Instances[0].PublicDnsName)
 
 echo "$dns"
