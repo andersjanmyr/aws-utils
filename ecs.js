@@ -2,8 +2,6 @@
 "use strict";
 
 var AWS = require('aws-sdk');
-var sonyAwsProxyConfig = require('sony-aws-proxy-config');
-AWS.config.update(sonyAwsProxyConfig());
 var Promise = require('promise');
 var _ = require('lodash');
 var debug = require('debug')('ecs');

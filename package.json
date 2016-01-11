@@ -22,7 +22,6 @@
     "lodash": "^3.10.1",
     "minimist": "^1.2.0",
     "promise": "^7.0.4",
-    "sony-aws-proxy-config": "git+ssh://git@github.com:SonyMobile/sony-aws-proxy-config.git",
     "yargs": "^3.9.1"
   }
 }
