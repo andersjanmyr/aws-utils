@@ -21,5 +21,9 @@ for host in $hosts; do
     found=$host
   fi
 done
-echo "Service is on $found, connecting"
-ssh -i ~/.ssh/docker-key.pem $found "$*"
+if [ -n "$found" ]; then
+  echo "Service found on $found, connecting"
+  ssh -i ~/.ssh/docker-key.pem $found "$*"
+else
+  echo "Service NOT found, $service"
+fi
