@@ -1,9 +1,10 @@
 #!/bin/bash
 
+program=$(basename $0)
 service=$1
 if [ $# -lt 1 ]
 then
-  echo "Usage: $0 service-regex [stackname] [command]"
+  echo "Usage: $program service-regex [stackname] [command]"
   exit 1
 fi
 
