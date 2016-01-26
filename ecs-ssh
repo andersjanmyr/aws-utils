@@ -1,0 +1,25 @@
+#!/bin/bash
+
+service=$1
+if [ $# -lt 1 ]
+then
+  echo "Usage: $0 service-regex [stackname] [command]"
+  exit 1
+fi
+
+name=${2:-unstable-ecscluster-support}
+shift
+shift
+hosts=$(aws ec2 describe-instances \
+  --filters Name=tag:Name,Values=$name \
+  Name=instance-state-name,Values=running \
+  | jq -r .Reservations[$index].Instances[].PublicDnsName)
+
+for host in $hosts; do
+  match=$(ssh $host -i ~/.ssh/docker-key.pem "docker ps |grep $service")
+  if [ -n "$match" ]; then
+    found=$host
+  fi
+done
+echo "Service is on $host, connecting"
+ssh -i ~/.ssh/docker-key.pem $host "$*"
