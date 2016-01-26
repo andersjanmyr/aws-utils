@@ -17,14 +17,14 @@ hosts=$(aws ec2 describe-instances \
   | jq -r .Reservations[$index].Instances[].PublicDnsName)
 
 for host in $hosts; do
-  match=$(ssh $host -i ~/.ssh/docker-key.pem "docker ps |grep $service")
+  match=$(ssh $host "docker ps |grep $service")
   if [ -n "$match" ]; then
     found=$host
   fi
 done
 if [ -n "$found" ]; then
   echo "Service found on $found, connecting"
-  ssh -i ~/.ssh/docker-key.pem $found "$*"
+  ssh $found "$*"
 else
   echo "Service NOT found, $service"
 fi
