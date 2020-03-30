@@ -9,5 +9,6 @@ aws s3 cp \
   --metadata 'touched=true' \
   --recursive --exclude="*" \
   --include="$includes" \
+  --acl bucket-owner-full-control \
   "${@:3}" \
   "$prefix" "$prefix"
