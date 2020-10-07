@@ -5,7 +5,7 @@ set -o noglob
 
 aws_ls() {
   local prefix=$1
-  aws --profile origin-prod s3 ls $prefix/ | awk -v prefix=$prefix 'NF==2 {print prefix "/" $2}' | sed 's/.$//'
+  aws s3 ls $prefix/ | awk -v prefix=$prefix 'NF==2 {print prefix "/" $2}' | sed 's/.$//'
 }
 
 expand_prefix() {
